@@ -20,4 +20,4 @@ jobs:
         sudo apt-get update
         sudo apt-get install trivy
      - name: Scan container
-       run: trivy image trivy --exit-code 0 --severity MEDIUM,HIGH
+       run: trivy image trivy --exit-code 1 --severity MEDIUM,HIGH
