@@ -2,7 +2,7 @@ on:
  - push
  - workflow_dispatch
 
- jobs:
+jobs:
    container:
      runs-on: ubuntu:latest
      steps:
