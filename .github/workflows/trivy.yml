@@ -3,7 +3,7 @@ on:
  - workflow_dispatch
 
 jobs:
-   container:
+   container_scanning_using_trivy:
      runs-on: ubuntu-latest
      steps:
      - name: Checkout
