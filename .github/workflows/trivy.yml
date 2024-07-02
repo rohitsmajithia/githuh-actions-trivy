@@ -2,6 +2,9 @@ on:
  - push
  - workflow_dispatch
 
+ env:
+   CACHE_DIR: /home/runner/work/_temp/trivy
+
 jobs:
    container_scanning_using_trivy:
      runs-on: ubuntu-latest
@@ -19,5 +22,12 @@ jobs:
         echo "deb [signed-by=/usr/share/keyrings/trivy.gpg] https://aquasecurity.github.io/trivy-repo/deb generic main" | sudo tee -a /etc/apt/sources.list.d/trivy.list
         sudo apt-get update
         sudo apt-get install trivy
+     - name: Cache Trivy Database
+       uses: actions/cache@v4.0.2
+       with:
+         path: {{ env.CACHE_DIR }}
+         key: anblickstrivy
+     - name: Trivy Database Download
+       run: trivy image apline --download-db-only --cache-dir {{ env.CACHE_DIR }}
      - name: Scan container
-       run: trivy image trivy --scanners vuln
+       run: trivy image trivy --scanners vuln --skip-db-update --cache-dir {{ env.CACHE_DIR }}
