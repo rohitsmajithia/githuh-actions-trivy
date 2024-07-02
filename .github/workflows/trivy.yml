@@ -29,7 +29,7 @@ jobs:
          path: ${{ env.CACHE_DIR }}
          key: anblickstrivy
      - name: Trivy Database Download
-     - if: ${{ steps.trivy-cache.outputs.cache-hit == 'false' }}
+       if: ${{ steps.trivy-cache.outputs.cache-hit == 'false' }}
        run: trivy image apline --download-db-only --cache-dir ${{ env.CACHE_DIR }}
      - name: Scan container
        run: trivy image trivy --scanners vuln --skip-db-update --cache-dir ${{ env.CACHE_DIR }}
